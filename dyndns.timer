@@ -1,0 +1,8 @@
+[Unit]
+Description=Update Route53 DNS records
+
+[Timer]
+OnUnitActiveSec=5min
+
+[Install]
+WantedBy=timers.target
