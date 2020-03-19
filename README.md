@@ -10,7 +10,7 @@ This script updates DNS records hosted by [Amazon Route 53][route53].
 First, configure a virtual environment and install dependencies:
 
     virtualenv --python=python3 .venv
-    .venv/bin/activate
+    . .venv/bin/activate
     pip install -r requirements.txt
     command -v rehash && rehash
 
@@ -42,3 +42,15 @@ This command updates the DNS record for the domain `ryan.govost.es` to the curre
     $ python route53-dyndns.py set ryan.govost.es -
 
 The external IP address is determined through a public API which may become unavailable or return an incorrect result. If you want to determine the external IP through other means, simply provide it instead of `-`.
+
+
+## Systemd Service
+
+To regularly update Route 53 from a Linux host with systemd, edit the credentials, paths, and domain name in `dyndns.service`, then:
+
+    sudo cp dyndns.service dyndns.timer /etc/systemd/system/
+    sudo systemctl enable dyndns.timer
+    sudo systemctl start dyndns.timer
+    systemctl list-timers dyndns.timer
+
+The last command should show when the next update will occur.

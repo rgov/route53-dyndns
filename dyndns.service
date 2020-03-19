@@ -1,5 +1,3 @@
-# Edit this file and install it into /etc/systemd/system/
-
 [Unit]
 Description=Route53 DNS record updater
 After=network.target
@@ -8,4 +6,5 @@ After=network.target
 Type=oneshot
 Environment="AWS_ACCESS_KEY_ID=AKIATM5TRILULZDQCDP7"
 Environment="AWS_SECRET_ACCESS_KEY=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"
-ExecStart=/opt/route53-dyndns/.venv/bin/python route53-dyndns.py set ryan.govost.es -
+WorkingDirectory=/opt/route53-dyndns
+ExecStart=/bin/sh -c '.venv/bin/python route53-dyndns.py set ryan.govost.es -'

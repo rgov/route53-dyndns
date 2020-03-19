@@ -2,7 +2,7 @@
 Description=Update Route53 DNS records
 
 [Timer]
-OnUnitActiveSec=5min
+OnCalendar=*:0/5
 
 [Install]
 WantedBy=timers.target
